@@ -4,70 +4,70 @@ export const daoABI = [
         'inputs': [
             {
                 'name': '',
-                'type': 'uint256',
-            },
+                'type': 'uint256'
+            }
         ],
         'name': 'proposals',
         'outputs': [
             {
                 'name': 'recipient',
-                'type': 'address',
+                'type': 'address'
             },
             {
                 'name': 'amount',
-                'type': 'uint256',
+                'type': 'uint256'
             },
             {
                 'name': 'metadataHash',
-                'type': 'bytes',
+                'type': 'bytes'
             },
             {
                 'name': 'timeCreated',
-                'type': 'uint256',
+                'type': 'uint256'
             },
             {
                 'name': 'votingDeadline',
-                'type': 'uint256',
+                'type': 'uint256'
             },
             {
                 'name': 'finalized',
-                'type': 'bool',
+                'type': 'bool'
             },
             {
                 'name': 'proposalPassed',
-                'type': 'bool',
+                'type': 'bool'
             },
             {
                 'name': 'numberOfVotes',
-                'type': 'uint256',
+                'type': 'uint256'
             },
             {
                 'name': 'proposalHash',
-                'type': 'bytes32',
-            },
+                'type': 'bytes32'
+            }
         ],
         'payable': false,
         'stateMutability': 'view',
-        'type': 'function',
+        'type': 'function'
     },
     {
         'constant': true,
         'inputs': [
             {
                 'name': '',
-                'type': 'address',
-            },
+                'type': 'address'
+            }
         ],
         'name': 'delegatesByDelegator',
         'outputs': [
             {
                 'name': '',
-                'type': 'address',
-            },
+                'type': 'address'
+            }
         ],
         'payable': false,
         'stateMutability': 'view',
-        'type': 'function',
+        'type': 'function'
     },
     {
         'constant': true,
@@ -76,12 +76,12 @@ export const daoABI = [
         'outputs': [
             {
                 'name': '',
-                'type': 'string',
-            },
+                'type': 'string'
+            }
         ],
         'payable': false,
         'stateMutability': 'view',
-        'type': 'function',
+        'type': 'function'
     },
     {
         'constant': true,
@@ -90,76 +90,76 @@ export const daoABI = [
         'outputs': [
             {
                 'name': '',
-                'type': 'uint256',
-            },
+                'type': 'uint256'
+            }
         ],
         'payable': false,
         'stateMutability': 'view',
-        'type': 'function',
+        'type': 'function'
     },
     {
         'constant': true,
         'inputs': [
             {
                 'name': '',
-                'type': 'address',
-            },
+                'type': 'address'
+            }
         ],
         'name': 'lockedDelegatingTokens',
         'outputs': [
             {
                 'name': '',
-                'type': 'uint256',
-            },
+                'type': 'uint256'
+            }
         ],
         'payable': false,
         'stateMutability': 'view',
-        'type': 'function',
+        'type': 'function'
     },
     {
         'constant': true,
         'inputs': [
             {
                 'name': 'proposalNumber',
-                'type': 'uint256',
-            },
+                'type': 'uint256'
+            }
         ],
         'name': 'countVotes',
         'outputs': [
             {
                 'name': 'yea',
-                'type': 'uint256',
+                'type': 'uint256'
             },
             {
                 'name': 'nay',
-                'type': 'uint256',
+                'type': 'uint256'
             },
             {
                 'name': 'quorum',
-                'type': 'uint256',
-            },
+                'type': 'uint256'
+            }
         ],
         'payable': false,
         'stateMutability': 'view',
-        'type': 'function',
+        'type': 'function'
     },
     {
         'constant': false,
         'inputs': [
             {
                 'name': 'proposalNumber',
-                'type': 'uint256',
+                'type': 'uint256'
             },
             {
                 'name': 'transactionBytecode',
-                'type': 'bytes',
-            },
+                'type': 'bytes'
+            }
         ],
         'name': 'executeProposal',
         'outputs': [],
         'payable': false,
         'stateMutability': 'nonpayable',
-        'type': 'function',
+        'type': 'function'
     },
     {
         'constant': true,
@@ -168,31 +168,31 @@ export const daoABI = [
         'outputs': [
             {
                 'name': '',
-                'type': 'address',
-            },
+                'type': 'address'
+            }
         ],
         'payable': false,
         'stateMutability': 'view',
-        'type': 'function',
+        'type': 'function'
     },
     {
         'constant': true,
         'inputs': [
             {
                 'name': '',
-                'type': 'address',
-            },
+                'type': 'address'
+            }
         ],
         'name': 'delegatedAmountsByDelegate',
         'outputs': [
             {
                 'name': '',
-                'type': 'uint256',
-            },
+                'type': 'uint256'
+            }
         ],
         'payable': false,
         'stateMutability': 'view',
-        'type': 'function',
+        'type': 'function'
     },
     {
         'constant': true,
@@ -201,35 +201,35 @@ export const daoABI = [
         'outputs': [
             {
                 'name': '',
-                'type': 'uint256',
-            },
+                'type': 'uint256'
+            }
         ],
         'payable': false,
         'stateMutability': 'view',
-        'type': 'function',
+        'type': 'function'
     },
     {
         'constant': true,
         'inputs': [
             {
                 'name': 'proposalNumber',
-                'type': 'uint256',
+                'type': 'uint256'
             },
             {
                 'name': 'shareholder',
-                'type': 'address',
-            },
+                'type': 'address'
+            }
         ],
         'name': 'hasVoted',
         'outputs': [
             {
                 'name': '',
-                'type': 'bool',
-            },
+                'type': 'bool'
+            }
         ],
         'payable': false,
         'stateMutability': 'view',
-        'type': 'function',
+        'type': 'function'
     },
     {
         'constant': true,
@@ -238,30 +238,30 @@ export const daoABI = [
         'outputs': [
             {
                 'name': '',
-                'type': 'uint256',
-            },
+                'type': 'uint256'
+            }
         ],
         'payable': false,
         'stateMutability': 'view',
-        'type': 'function',
+        'type': 'function'
     },
     {
         'constant': false,
         'inputs': [
             {
                 'name': 'tokensToLock',
-                'type': 'uint256',
+                'type': 'uint256'
             },
             {
                 'name': 'delegate',
-                'type': 'address',
-            },
+                'type': 'address'
+            }
         ],
         'name': 'setDelegateAndLockTokens',
         'outputs': [],
         'payable': false,
         'stateMutability': 'nonpayable',
-        'type': 'function',
+        'type': 'function'
     },
     {
         'constant': false,
@@ -270,12 +270,12 @@ export const daoABI = [
         'outputs': [
             {
                 'name': 'lockedTokens',
-                'type': 'uint256',
-            },
+                'type': 'uint256'
+            }
         ],
         'payable': false,
         'stateMutability': 'nonpayable',
-        'type': 'function',
+        'type': 'function'
     },
     {
         'constant': true,
@@ -284,34 +284,34 @@ export const daoABI = [
         'outputs': [
             {
                 'name': '',
-                'type': 'uint256',
-            },
+                'type': 'uint256'
+            }
         ],
         'payable': false,
         'stateMutability': 'view',
-        'type': 'function',
+        'type': 'function'
     },
     {
         'constant': false,
         'inputs': [
             {
                 'name': 'minimumSharesToPassAVote',
-                'type': 'uint256',
+                'type': 'uint256'
             },
             {
                 'name': 'minutesForDebate',
-                'type': 'uint256',
+                'type': 'uint256'
             },
             {
                 'name': 'sharesToBeBoardMember',
-                'type': 'uint256',
-            },
+                'type': 'uint256'
+            }
         ],
         'name': 'changeVotingRules',
         'outputs': [],
         'payable': false,
         'stateMutability': 'nonpayable',
-        'type': 'function',
+        'type': 'function'
     },
     {
         'constant': true,
@@ -320,38 +320,38 @@ export const daoABI = [
         'outputs': [
             {
                 'name': '',
-                'type': 'uint256',
-            },
+                'type': 'uint256'
+            }
         ],
         'payable': false,
         'stateMutability': 'view',
-        'type': 'function',
+        'type': 'function'
     },
     {
         'constant': false,
         'inputs': [
             {
                 'name': 'from',
-                'type': 'address',
+                'type': 'address'
             },
             {
                 'name': 'value',
-                'type': 'uint256',
+                'type': 'uint256'
             },
             {
                 'name': 'token',
-                'type': 'address',
+                'type': 'address'
             },
             {
                 'name': 'extraData',
-                'type': 'bytes',
-            },
+                'type': 'bytes'
+            }
         ],
         'name': 'receiveApproval',
         'outputs': [],
         'payable': false,
         'stateMutability': 'nonpayable',
-        'type': 'function',
+        'type': 'function'
     },
     {
         'constant': true,
@@ -360,12 +360,12 @@ export const daoABI = [
         'outputs': [
             {
                 'name': '',
-                'type': 'address',
-            },
+                'type': 'address'
+            }
         ],
         'payable': false,
         'stateMutability': 'view',
-        'type': 'function',
+        'type': 'function'
     },
     {
         'constant': true,
@@ -374,12 +374,12 @@ export const daoABI = [
         'outputs': [
             {
                 'name': '',
-                'type': 'uint256',
-            },
+                'type': 'uint256'
+            }
         ],
         'payable': false,
         'stateMutability': 'view',
-        'type': 'function',
+        'type': 'function'
     },
     {
         'constant': true,
@@ -388,66 +388,66 @@ export const daoABI = [
         'outputs': [
             {
                 'name': '',
-                'type': 'uint256',
-            },
+                'type': 'uint256'
+            }
         ],
         'payable': false,
         'stateMutability': 'view',
-        'type': 'function',
+        'type': 'function'
     },
     {
         'constant': false,
         'inputs': [
             {
                 'name': 'proposalNumber',
-                'type': 'uint256',
+                'type': 'uint256'
             },
             {
                 'name': 'supportsProposal',
-                'type': 'bool',
-            },
+                'type': 'bool'
+            }
         ],
         'name': 'vote',
         'outputs': [
             {
                 'name': 'voteID',
-                'type': 'uint256',
-            },
+                'type': 'uint256'
+            }
         ],
         'payable': false,
         'stateMutability': 'nonpayable',
-        'type': 'function',
+        'type': 'function'
     },
     {
         'constant': false,
         'inputs': [
             {
                 'name': 'beneficiary',
-                'type': 'address',
+                'type': 'address'
             },
             {
                 'name': 'weiAmount',
-                'type': 'uint256',
+                'type': 'uint256'
             },
             {
                 'name': 'jobMetadataHash',
-                'type': 'bytes',
+                'type': 'bytes'
             },
             {
                 'name': 'transactionBytecode',
-                'type': 'bytes',
-            },
+                'type': 'bytes'
+            }
         ],
         'name': 'newProposal',
         'outputs': [
             {
                 'name': 'proposalID',
-                'type': 'uint256',
-            },
+                'type': 'uint256'
+            }
         ],
         'payable': false,
         'stateMutability': 'nonpayable',
-        'type': 'function',
+        'type': 'function'
     },
     {
         'constant': true,
@@ -456,43 +456,43 @@ export const daoABI = [
         'outputs': [
             {
                 'name': '',
-                'type': 'uint256',
-            },
+                'type': 'uint256'
+            }
         ],
         'payable': false,
         'stateMutability': 'view',
-        'type': 'function',
+        'type': 'function'
     },
     {
         'constant': true,
         'inputs': [
             {
                 'name': 'proposalNumber',
-                'type': 'uint256',
+                'type': 'uint256'
             },
             {
                 'name': 'beneficiary',
-                'type': 'address',
+                'type': 'address'
             },
             {
                 'name': 'weiAmount',
-                'type': 'uint256',
+                'type': 'uint256'
             },
             {
                 'name': 'transactionBytecode',
-                'type': 'bytes',
-            },
+                'type': 'bytes'
+            }
         ],
         'name': 'checkProposalCode',
         'outputs': [
             {
                 'name': 'codeChecksOut',
-                'type': 'bool',
-            },
+                'type': 'bool'
+            }
         ],
         'payable': false,
         'stateMutability': 'view',
-        'type': 'function',
+        'type': 'function'
     },
     {
         'constant': true,
@@ -501,28 +501,28 @@ export const daoABI = [
         'outputs': [
             {
                 'name': '',
-                'type': 'uint256',
-            },
+                'type': 'uint256'
+            }
         ],
         'payable': false,
         'stateMutability': 'view',
-        'type': 'function',
+        'type': 'function'
     },
     {
         'inputs': [
             {
                 'name': 'sharesAddress',
-                'type': 'address',
-            },
+                'type': 'address'
+            }
         ],
         'payable': false,
         'stateMutability': 'nonpayable',
-        'type': 'constructor',
+        'type': 'constructor'
     },
     {
         'payable': true,
         'stateMutability': 'payable',
-        'type': 'fallback',
+        'type': 'fallback'
     },
     {
         'anonymous': false,
@@ -530,26 +530,26 @@ export const daoABI = [
             {
                 'indexed': false,
                 'name': 'proposalID',
-                'type': 'uint256',
+                'type': 'uint256'
             },
             {
                 'indexed': false,
                 'name': 'recipient',
-                'type': 'address',
+                'type': 'address'
             },
             {
                 'indexed': false,
                 'name': 'amount',
-                'type': 'uint256',
+                'type': 'uint256'
             },
             {
                 'indexed': false,
                 'name': 'metadataHash',
-                'type': 'bytes',
-            },
+                'type': 'bytes'
+            }
         ],
         'name': 'ProposalAdded',
-        'type': 'event',
+        'type': 'event'
     },
     {
         'anonymous': false,
@@ -557,21 +557,21 @@ export const daoABI = [
             {
                 'indexed': false,
                 'name': 'proposalID',
-                'type': 'uint256',
+                'type': 'uint256'
             },
             {
                 'indexed': false,
                 'name': 'position',
-                'type': 'bool',
+                'type': 'bool'
             },
             {
                 'indexed': false,
                 'name': 'voter',
-                'type': 'address',
-            },
+                'type': 'address'
+            }
         ],
         'name': 'Voted',
-        'type': 'event',
+        'type': 'event'
     },
     {
         'anonymous': false,
@@ -579,31 +579,31 @@ export const daoABI = [
             {
                 'indexed': false,
                 'name': 'proposalID',
-                'type': 'uint256',
+                'type': 'uint256'
             },
             {
                 'indexed': false,
                 'name': 'yea',
-                'type': 'uint256',
+                'type': 'uint256'
             },
             {
                 'indexed': false,
                 'name': 'nay',
-                'type': 'uint256',
+                'type': 'uint256'
             },
             {
                 'indexed': false,
                 'name': 'quorum',
-                'type': 'uint256',
+                'type': 'uint256'
             },
             {
                 'indexed': false,
                 'name': 'active',
-                'type': 'bool',
-            },
+                'type': 'bool'
+            }
         ],
         'name': 'ProposalTallied',
-        'type': 'event',
+        'type': 'event'
     },
     {
         'anonymous': false,
@@ -611,21 +611,21 @@ export const daoABI = [
             {
                 'indexed': false,
                 'name': 'newMinimumQuorum',
-                'type': 'uint256',
+                'type': 'uint256'
             },
             {
                 'indexed': false,
                 'name': 'newDebatingPeriodInMinutes',
-                'type': 'uint256',
+                'type': 'uint256'
             },
             {
                 'indexed': false,
                 'name': 'newSharesTokenAddress',
-                'type': 'address',
-            },
+                'type': 'address'
+            }
         ],
         'name': 'ChangeOfRules',
-        'type': 'event',
+        'type': 'event'
     },
     {
         'anonymous': false,
@@ -633,21 +633,21 @@ export const daoABI = [
             {
                 'indexed': true,
                 'name': 'delegator',
-                'type': 'address',
+                'type': 'address'
             },
             {
                 'indexed': false,
                 'name': 'numberOfTokens',
-                'type': 'uint256',
+                'type': 'uint256'
             },
             {
                 'indexed': true,
                 'name': 'delegate',
-                'type': 'address',
-            },
+                'type': 'address'
+            }
         ],
         'name': 'TokensDelegated',
-        'type': 'event',
+        'type': 'event'
     },
     {
         'anonymous': false,
@@ -655,21 +655,21 @@ export const daoABI = [
             {
                 'indexed': true,
                 'name': 'delegator',
-                'type': 'address',
+                'type': 'address'
             },
             {
                 'indexed': false,
                 'name': 'numberOfTokens',
-                'type': 'uint256',
+                'type': 'uint256'
             },
             {
                 'indexed': true,
                 'name': 'delegate',
-                'type': 'address',
-            },
+                'type': 'address'
+            }
         ],
         'name': 'TokensUndelegated',
-        'type': 'event',
+        'type': 'event'
     },
     {
         'anonymous': false,
@@ -677,16 +677,16 @@ export const daoABI = [
             {
                 'indexed': true,
                 'name': 'sender',
-                'type': 'address',
+                'type': 'address'
             },
             {
                 'indexed': false,
                 'name': 'amount',
-                'type': 'uint256',
-            },
+                'type': 'uint256'
+            }
         ],
         'name': 'ReceivedEther',
-        'type': 'event',
+        'type': 'event'
     },
     {
         'anonymous': false,
@@ -694,26 +694,26 @@ export const daoABI = [
             {
                 'indexed': true,
                 'name': 'from',
-                'type': 'address',
+                'type': 'address'
             },
             {
                 'indexed': false,
                 'name': 'value',
-                'type': 'uint256',
+                'type': 'uint256'
             },
             {
                 'indexed': true,
                 'name': 'token',
-                'type': 'address',
+                'type': 'address'
             },
             {
                 'indexed': false,
                 'name': 'extraData',
-                'type': 'bytes',
-            },
+                'type': 'bytes'
+            }
         ],
         'name': 'ReceivedTokens',
-        'type': 'event',
-    },
+        'type': 'event'
+    }
 ];
 // tslint:disable:max-file-line-count

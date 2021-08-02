@@ -11,7 +11,7 @@ public {{this.name}} = {
         const self = this as {{contractName}}Contract;
         const txDataWithDefaults = await self.applyDefaultsToTxDataAsync(
             txData,
-            self.{{this.name}}.estimateGasAsync.bind(
+            self.{{this.name}}.estimateGasAsync.bind<{{contractName}}Contract, any, Promise<number>>(
                 self,
                 {{> params inputs=inputs}}
             ),

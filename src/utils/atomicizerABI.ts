@@ -4,26 +4,26 @@ export const atomicizerABI = [
         'inputs': [
             {
                 'name': 'addrs',
-                'type': 'address[]',
+                'type': 'address[]'
             },
             {
                 'name': 'values',
-                'type': 'uint256[]',
+                'type': 'uint256[]'
             },
             {
                 'name': 'calldataLengths',
-                'type': 'uint256[]',
+                'type': 'uint256[]'
             },
             {
                 'name': 'calldatas',
-                'type': 'bytes',
-            },
+                'type': 'bytes'
+            }
         ],
         'name': 'atomicize',
         'outputs': [],
         'payable': false,
         'stateMutability': 'nonpayable',
-        'type': 'function',
-    },
+        'type': 'function'
+    }
 ];
 // tslint:disable:max-file-line-count
