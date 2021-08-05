@@ -188,7 +188,7 @@ export class WyvernProtocol {
    */
   @decorators.syncWyvernProtocolErrorHandler
   public static getOrderHashHex(order: Order | SignedOrder): string {
-    assert.doesConformToSchema("order", order, schemas.orderSchema);
+    // assert.doesConformToSchema("order", order, schemas.orderSchema);
     const orderHashHex = utils.getOrderHashHex(order);
     return orderHashHex;
   }
