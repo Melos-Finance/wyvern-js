@@ -375,7 +375,7 @@ export class WyvernProtocol {
       case "bytes32":
         return "0x0000000000000000000000000000000000000000000000000000000000000000";
       case "bytes":
-        return "0x";
+        return "";
       case "bool":
         return false;
       case "int":
