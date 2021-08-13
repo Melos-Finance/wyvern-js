@@ -1118,22 +1118,22 @@ export const exchangeABI = [
         'anonymous': false,
         'inputs': [
             {
-                'indexed': false,
+                'indexed': true,
                 'name': 'buyHash',
                 'type': 'bytes32'
             },
             {
-                'indexed': false,
+                'indexed': true,
                 'name': 'sellHash',
                 'type': 'bytes32'
             },
             {
-                'indexed': true,
+                'indexed': false,
                 'name': 'maker',
                 'type': 'address'
             },
             {
-                'indexed': true,
+                'indexed': false,
                 'name': 'taker',
                 'type': 'address'
             },
@@ -1143,7 +1143,12 @@ export const exchangeABI = [
                 'type': 'uint256'
             },
             {
-                'indexed': true,
+                'indexed': false,
+                'name': 'paymentToken',
+                'type': 'address'
+            },
+            {
+                'indexed': false,
                 'name': 'metadata',
                 'type': 'bytes32'
             }
