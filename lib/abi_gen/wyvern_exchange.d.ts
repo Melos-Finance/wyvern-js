@@ -10,6 +10,9 @@ export declare class WyvernExchangeContract extends BaseContract {
     name: {
         callAsync(txData?: TxData): Promise<string>;
     };
+    auctionBroker: {
+        callAsync(txData?: TxData): Promise<string>;
+    };
     tokenTransferProxy: {
         callAsync(txData?: TxData): Promise<string>;
     };
@@ -28,6 +31,11 @@ export declare class WyvernExchangeContract extends BaseContract {
     };
     guardedArrayReplace: {
         callAsync(array_0: string, desired_1: string, mask_2: string, txData?: TxData): Promise<string>;
+    };
+    chageAuctionBroker: {
+        sendTransactionAsync(newAuctionBroker_0: string, txData?: TxData): Promise<string>;
+        estimateGasAsync(newAuctionBroker_0: string, txData?: TxData): Promise<number>;
+        getABIEncodedTransactionData(newAuctionBroker_0: string): string;
     };
     minimumTakerProtocolFee: {
         callAsync(txData?: TxData): Promise<BigNumber>;

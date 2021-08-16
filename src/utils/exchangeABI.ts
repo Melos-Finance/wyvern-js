@@ -16,6 +16,20 @@ export const exchangeABI = [
     {
         'constant': true,
         'inputs': [],
+        'name': 'auctionBroker',
+        'outputs': [
+            {
+                'name': '',
+                'type': 'address'
+            }
+        ],
+        'payable': false,
+        'stateMutability': 'view',
+        'type': 'function'
+    },
+    {
+        'constant': true,
+        'inputs': [],
         'name': 'tokenTransferProxy',
         'outputs': [
             {
@@ -107,6 +121,20 @@ export const exchangeABI = [
         ],
         'payable': false,
         'stateMutability': 'pure',
+        'type': 'function'
+    },
+    {
+        'constant': false,
+        'inputs': [
+            {
+                'name': 'newAuctionBroker',
+                'type': 'address'
+            }
+        ],
+        'name': 'chageAuctionBroker',
+        'outputs': [],
+        'payable': false,
+        'stateMutability': 'nonpayable',
         'type': 'function'
     },
     {
@@ -951,6 +979,10 @@ export const exchangeABI = [
             },
             {
                 'name': 'protocolFeeAddress',
+                'type': 'address'
+            },
+            {
+                'name': 'auctionBrokerAddress',
                 'type': 'address'
             }
         ],
