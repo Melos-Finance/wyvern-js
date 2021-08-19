@@ -19,6 +19,7 @@ import {
   Order,
   ReplacementEncoder,
   SignedOrder,
+  SolidityTypes,
   TransactionReceiptWithDecodedLogs,
   Web3Provider,
   WyvernProtocolConfig,
@@ -215,7 +216,7 @@ export class WyvernProtocol {
         bitmask: kind === replaceKind ? 255 : 0,
         type: ethABI.elementaryName(type),
         value: value
-          ? type == FunctionInputKind.Data
+          ? type == SolidityTypes.Bytes
             ? Buffer.from(value, "hex")
             : value
           : WyvernProtocol.generateDefaultValue(type),
