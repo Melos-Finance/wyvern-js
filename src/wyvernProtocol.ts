@@ -214,10 +214,11 @@ export class WyvernProtocol {
       .map(({ kind, type, value }) => ({
         bitmask: kind === replaceKind ? 255 : 0,
         type: ethABI.elementaryName(type),
-        value:
-          value !== undefined
-            ? value
-            : WyvernProtocol.generateDefaultValue(type),
+        value: value
+          ? type == FunctionInputKind.Data
+            ? Buffer.from(value, "hex")
+            : value
+          : WyvernProtocol.generateDefaultValue(type),
       }))
       .reduce((offset, { bitmask, type, value }) => {
         // The 0xff bytes in the mask select the replacement bytes. All other bytes are 0x00.
