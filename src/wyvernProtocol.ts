@@ -172,13 +172,7 @@ export class WyvernProtocol {
     assert.isBigNumber("amount", amount);
     assert.isNumber("decimals", decimals);
     const unit = new BigNumber(10).pow(decimals);
-    const baseUnitAmount = amount.times(unit);
-    const hasDecimals = baseUnitAmount.decimalPlaces() !== 0;
-    if (hasDecimals) {
-      throw new Error(
-        `Invalid unit amount: ${amount.toString()} - Too many decimal places`
-      );
-    }
+    const baseUnitAmount = amount.times(unit).round();
     return baseUnitAmount;
   }
 
