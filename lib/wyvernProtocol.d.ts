@@ -1,24 +1,18 @@
-import { BigNumber } from "@0xproject/utils";
+import { BigNumber } from "bignumber.js";
+import BN from "bn.js";
 import { WyvernAtomicizerContract } from "./abi_gen/wyvern_atomicizer";
-import { WyvernDAOContract } from "./abi_gen/wyvern_d_a_o";
 import { WyvernExchangeContract } from "./abi_gen/wyvern_exchange";
 import { WyvernProxyRegistryContract } from "./abi_gen/wyvern_proxy_registry";
-import { WyvernTokenContract } from "./abi_gen/wyvern_token";
-import { AtomicizedReplacementEncoder, ECSignature, Network, Order, ReplacementEncoder, SignedOrder, TransactionReceiptWithDecodedLogs, Web3Provider, WyvernProtocolConfig } from "./types";
+import { AtomicizedReplacementEncoder, ECSignature, Network, Order, ReplacementEncoder, SignedOrder, TransactionReceipt, Web3Provider, WyvernProtocolConfig } from "./types";
 export declare class WyvernProtocol {
     static NULL_ADDRESS: string;
-    static MAX_UINT_256: BigNumber;
+    static MAX_UINT_256: BN;
     wyvernExchange: WyvernExchangeContract;
     wyvernProxyRegistry: WyvernProxyRegistryContract;
-    wyvernDAO: WyvernDAOContract;
-    wyvernToken: WyvernTokenContract;
     wyvernAtomicizer: WyvernAtomicizerContract;
-    private _web3Wrapper;
-    private _abiDecoder;
+    private _web3;
     static getExchangeContractAddress(network: Network): string;
     static getProxyRegistryContractAddress(network: Network): string;
-    static getTokenContractAddress(network: Network): string;
-    static getDAOContractAddress(network: Network): string;
     static getAtomicizerContractAddress(network: Network): string;
     static getTokenTransferProxyAddress(network: Network): string;
     /**
@@ -53,7 +47,7 @@ export declare class WyvernProtocol {
      * @param   decimals    The number of decimal places the unit amount has.
      * @return  The amount in units.
      */
-    static toUnitAmount(amount: BigNumber, decimals: number): BigNumber;
+    static toUnitAmount(amount: BigNumber, decimals: number): number;
     /**
      * A baseUnit is defined as the smallest denomination of a token. An amount expressed in baseUnits
      * is the amount expressed in the smallest denomination.
@@ -62,7 +56,7 @@ export declare class WyvernProtocol {
      * @param   decimals    The number of decimal places the unit amount has.
      * @return  The amount in baseUnits.
      */
-    static toBaseUnitAmount(amount: BigNumber, decimals: number): BigNumber;
+    static toBaseUnitAmount(amount: BigNumber | number, decimals: number): BigNumber;
     /**
      * Computes the orderHash for a supplied order.
      * @param   order   An object that conforms to the Order or SignedOrder interface definitions.
@@ -120,7 +114,7 @@ export declare class WyvernProtocol {
      * @param   txHash            Transaction hash
      * @param   pollingIntervalMs How often (in ms) should we check if the transaction is mined.
      * @param   timeoutMs         How long (in ms) to poll for transaction mined until aborting.
-     * @return  Transaction receipt with decoded log args.
+     * @return  Transaction receipt.
      */
-    awaitTransactionMinedAsync(txHash: string, pollingIntervalMs?: number, timeoutMs?: number): Promise<TransactionReceiptWithDecodedLogs>;
+    awaitTransactionMinedAsync(txHash: string, pollingIntervalMs?: number, timeoutMs?: number): Promise<TransactionReceipt>;
 }

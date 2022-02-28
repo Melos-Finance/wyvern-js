@@ -1,6 +1,6 @@
-import { BigNumber } from '@0xproject/utils';
-import BN = require('bn.js');
-import { Order, SignedOrder } from '../types';
+import { BigNumber } from "bignumber.js";
+import BN from "bn.js";
+import { Order, SignedOrder } from "../types";
 export declare const utils: {
     /**
      * Converts BigNumber instance to BN

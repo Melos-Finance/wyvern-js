@@ -1,15 +1,16 @@
-import { SchemaValidator } from "@0xproject/json-schemas";
-import { BigNumber, intervalUtils } from "@0xproject/utils";
-import { Web3Wrapper } from "@0xproject/web3-wrapper";
-import * as ethABI from "ethereumjs-abi";
+import { SchemaValidator } from "@0x/json-schemas";
+import { BigNumber } from "bignumber.js";
+import BN from "bn.js";
+
+import { intervalUtils } from "@0x/utils";
+import Web3 from "web3";
+import * as ethABI from "@melosstudio/ethereumjs-abi";
 import * as ethUtil from "ethereumjs-util";
 import * as _ from "lodash";
 
 import { WyvernAtomicizerContract } from "./abi_gen/wyvern_atomicizer";
-import { WyvernDAOContract } from "./abi_gen/wyvern_d_a_o";
 import { WyvernExchangeContract } from "./abi_gen/wyvern_exchange";
 import { WyvernProxyRegistryContract } from "./abi_gen/wyvern_proxy_registry";
-import { WyvernTokenContract } from "./abi_gen/wyvern_token";
 import { schemas } from "./schemas";
 import {
   AtomicizedReplacementEncoder,
@@ -19,12 +20,13 @@ import {
   Order,
   ReplacementEncoder,
   SignedOrder,
-  TransactionReceiptWithDecodedLogs,
+  TransactionReceipt,
   Web3Provider,
   WyvernProtocolConfig,
   WyvernProtocolError,
+  SolidityTypes,
 } from "./types";
-import { AbiDecoder } from "./utils/abi_decoder";
+
 import { assert } from "./utils/assert";
 import { constants } from "./utils/constants";
 import { decorators } from "./utils/decorators";
@@ -33,22 +35,13 @@ import { utils } from "./utils/utils";
 
 export class WyvernProtocol {
   public static NULL_ADDRESS = constants.NULL_ADDRESS;
-
-  public static MAX_UINT_256 = new BigNumber(2).pow(256).sub(1);
+  public static MAX_UINT_256 = new BN(2).pow(new BN(256)).subn(1);
 
   public wyvernExchange: WyvernExchangeContract;
-
   public wyvernProxyRegistry: WyvernProxyRegistryContract;
-
-  public wyvernDAO: WyvernDAOContract;
-
-  public wyvernToken: WyvernTokenContract;
-
   public wyvernAtomicizer: WyvernAtomicizerContract;
 
-  private _web3Wrapper: Web3Wrapper;
-
-  private _abiDecoder: AbiDecoder;
+  private _web3: Web3;
 
   public static getExchangeContractAddress(network: Network): string {
     return constants.DEPLOYED[network].WyvernExchange;
@@ -56,14 +49,6 @@ export class WyvernProtocol {
 
   public static getProxyRegistryContractAddress(network: Network): string {
     return constants.DEPLOYED[network].WyvernProxyRegistry;
-  }
-
-  public static getTokenContractAddress(network: Network): string {
-    return constants.DEPLOYED[network].WyvernToken;
-  }
-
-  public static getDAOContractAddress(network: Network): string {
-    return constants.DEPLOYED[network].WyvernDAO;
   }
 
   public static getAtomicizerContractAddress(network: Network): string {
@@ -117,7 +102,7 @@ export class WyvernProtocol {
     const factor = new BigNumber(10).pow(
       constants.MAX_DIGITS_IN_UNSIGNED_256_INT - 1
     );
-    const salt = randomNumber.times(factor).round();
+    const salt = randomNumber.times(factor).integerValue(BigNumber.ROUND_DOWN);
     return salt;
   }
 
@@ -133,10 +118,10 @@ export class WyvernProtocol {
     // format, we only assert that we were indeed passed a string.
     assert.isString("orderHash", orderHash);
     const schemaValidator = new SchemaValidator();
-    const isValidOrderHash = schemaValidator.validate(
+    const isValidOrderHash = schemaValidator.isValid(
       orderHash,
       schemas.orderHashSchema
-    ).valid;
+    );
     return isValidOrderHash;
   }
 
@@ -148,12 +133,12 @@ export class WyvernProtocol {
    * @param   decimals    The number of decimal places the unit amount has.
    * @return  The amount in units.
    */
-  public static toUnitAmount(amount: BigNumber, decimals: number): BigNumber {
-    assert.isValidBaseUnitAmount("amount", amount);
-    assert.isNumber("decimals", decimals);
+  public static toUnitAmount(amount: BigNumber, decimals: number): number {
+    // assert.isValidBaseUnitAmount("amount", amount);
+    // assert.isNumber("decimals", decimals);
     const aUnit = new BigNumber(10).pow(decimals);
     const unit = amount.div(aUnit);
-    return unit;
+    return unit.toNumber();
   }
 
   /**
@@ -165,19 +150,14 @@ export class WyvernProtocol {
    * @return  The amount in baseUnits.
    */
   public static toBaseUnitAmount(
-    amount: BigNumber,
+    amount: BigNumber | number,
     decimals: number
   ): BigNumber {
-    assert.isBigNumber("amount", amount);
     assert.isNumber("decimals", decimals);
     const unit = new BigNumber(10).pow(decimals);
-    const baseUnitAmount = amount.times(unit);
-    const hasDecimals = baseUnitAmount.decimalPlaces() !== 0;
-    if (hasDecimals) {
-      throw new Error(
-        `Invalid unit amount: ${amount.toString()} - Too many decimal places`
-      );
-    }
+    const baseUnitAmount = unit
+      .times(amount)
+      .integerValue(BigNumber.ROUND_CEIL);
     return baseUnitAmount;
   }
 
@@ -214,10 +194,11 @@ export class WyvernProtocol {
       .map(({ kind, type, value }) => ({
         bitmask: kind === replaceKind ? 255 : 0,
         type: ethABI.elementaryName(type),
-        value:
-          value !== undefined
-            ? value
-            : WyvernProtocol.generateDefaultValue(type),
+        value: value
+          ? type == SolidityTypes.Bytes
+            ? Buffer.from(value, "hex")
+            : value
+          : WyvernProtocol.generateDefaultValue(type),
       }))
       .reduce((offset, { bitmask, type, value }) => {
         // The 0xff bytes in the mask select the replacement bytes. All other bytes are 0x00.
@@ -375,7 +356,7 @@ export class WyvernProtocol {
       case "bytes32":
         return "0x0000000000000000000000000000000000000000000000000000000000000000";
       case "bytes":
-        return "";
+        return Buffer.from("");
       case "bool":
         return false;
       case "int":
@@ -394,15 +375,13 @@ export class WyvernProtocol {
   constructor(provider: Web3Provider, config: WyvernProtocolConfig) {
     assert.isWeb3Provider("provider", provider);
     // assert.doesConformToSchema('config', config, wyvernProtocolConfigSchema)
-    this._web3Wrapper = new Web3Wrapper(provider, {
-      gasPrice: config.gasPrice,
-    });
+    this._web3 = new Web3(provider);
 
     const exchangeContractAddress =
       config.wyvernExchangeContractAddress ||
       WyvernProtocol.getExchangeContractAddress(config.network);
     this.wyvernExchange = new WyvernExchangeContract(
-      this._web3Wrapper.getContractInstance(
+      new this._web3.eth.Contract(
         constants.EXCHANGE_ABI as any,
         exchangeContractAddress
       ),
@@ -413,31 +392,9 @@ export class WyvernProtocol {
       config.wyvernProxyRegistryContractAddress ||
       WyvernProtocol.getProxyRegistryContractAddress(config.network);
     this.wyvernProxyRegistry = new WyvernProxyRegistryContract(
-      this._web3Wrapper.getContractInstance(
+      new this._web3.eth.Contract(
         constants.PROXY_REGISTRY_ABI as any,
         proxyRegistryContractAddress
-      ),
-      {}
-    );
-
-    const daoContractAddress =
-      config.wyvernDAOContractAddress ||
-      WyvernProtocol.getDAOContractAddress(config.network);
-    this.wyvernDAO = new WyvernDAOContract(
-      this._web3Wrapper.getContractInstance(
-        constants.DAO_ABI as any,
-        daoContractAddress
-      ),
-      {}
-    );
-
-    const tokenContractAddress =
-      config.wyvernTokenContractAddress ||
-      WyvernProtocol.getTokenContractAddress(config.network);
-    this.wyvernToken = new WyvernTokenContract(
-      this._web3Wrapper.getContractInstance(
-        constants.TOKEN_ABI as any,
-        tokenContractAddress
       ),
       {}
     );
@@ -446,14 +403,12 @@ export class WyvernProtocol {
       config.wyvernAtomicizerContractAddress ||
       WyvernProtocol.getAtomicizerContractAddress(config.network);
     this.wyvernAtomicizer = new WyvernAtomicizerContract(
-      this._web3Wrapper.getContractInstance(
+      new this._web3.eth.Contract(
         constants.ATOMICIZER_ABI as any,
         atomicizerContractAddress
       ),
       {}
     );
-
-    this._abiDecoder = new AbiDecoder([]);
   }
 
   /**
@@ -463,7 +418,7 @@ export class WyvernProtocol {
    * @param   networkId   The id of the network your provider is connected to
    */
   public setProvider(provider: Web3Provider, networkId: number): void {
-    this._web3Wrapper.setProvider(provider);
+    this._web3.setProvider(provider);
     (this.wyvernExchange as any)._invalidateContractInstances();
     (this.wyvernExchange as any)._setNetworkId(networkId);
     (this.wyvernProxyRegistry as any)._invalidateContractInstance();
@@ -475,8 +430,7 @@ export class WyvernProtocol {
    * @return  An array of available user Ethereum addresses.
    */
   public async getAvailableAddressesAsync(): Promise<string[]> {
-    const availableAddresses =
-      await this._web3Wrapper.getAvailableAddressesAsync();
+    const availableAddresses = await this._web3.eth.getAccounts();
     return availableAddresses;
   }
 
@@ -496,7 +450,7 @@ export class WyvernProtocol {
     /* await assert.isSenderAddressAsync('signerAddress', signerAddress, this._web3Wrapper); */
 
     let msgHashHex;
-    const nodeVersion = await this._web3Wrapper.getNodeVersionAsync();
+    const nodeVersion = await this._web3.eth.getNodeInfo();
     const isParityNode = utils.isParityNode(nodeVersion);
     const isTestRpc = utils.isTestRpc(nodeVersion);
     if (isParityNode || isTestRpc) {
@@ -508,10 +462,7 @@ export class WyvernProtocol {
       msgHashHex = ethUtil.bufferToHex(msgHashBuff);
     }
 
-    const signature = await this._web3Wrapper.signTransactionAsync(
-      signerAddress,
-      msgHashHex
-    );
+    const signature = await this._web3.eth.sign(msgHashHex, signerAddress);
 
     // HACK: There is no consensus on whether the signatureHex string should be formatted as
     // v + r + s OR r + s + v, and different clients (even different versions of the same client)
@@ -550,23 +501,20 @@ export class WyvernProtocol {
    * @param   txHash            Transaction hash
    * @param   pollingIntervalMs How often (in ms) should we check if the transaction is mined.
    * @param   timeoutMs         How long (in ms) to poll for transaction mined until aborting.
-   * @return  Transaction receipt with decoded log args.
+   * @return  Transaction receipt.
    */
   public async awaitTransactionMinedAsync(
     txHash: string,
     pollingIntervalMs = 1000,
     timeoutMs?: number
-  ): Promise<TransactionReceiptWithDecodedLogs> {
+  ): Promise<TransactionReceipt> {
     let timeoutExceeded = false;
     if (timeoutMs) {
       setTimeout(() => (timeoutExceeded = true), timeoutMs);
     }
 
     const txReceiptPromise = new Promise(
-      (
-        resolve: (receipt: TransactionReceiptWithDecodedLogs) => void,
-        reject
-      ) => {
+      (resolve: (receipt: TransactionReceipt) => void, reject) => {
         const intervalId = intervalUtils.setAsyncExcludingInterval(
           async () => {
             if (timeoutExceeded) {
@@ -575,19 +523,11 @@ export class WyvernProtocol {
             }
 
             const transactionReceipt =
-              await this._web3Wrapper.getTransactionReceiptAsync(txHash);
+              await this._web3.eth.getTransactionReceipt(txHash);
             if (!_.isNull(transactionReceipt)) {
               intervalUtils.clearAsyncExcludingInterval(intervalId);
-              const logsWithDecodedArgs = _.map(
-                transactionReceipt.logs,
-                this._abiDecoder.tryToDecodeLogOrNoop.bind(this._abiDecoder)
-              );
-              const transactionReceiptWithDecodedLogArgs: TransactionReceiptWithDecodedLogs =
-                {
-                  ...transactionReceipt,
-                  logs: logsWithDecodedArgs,
-                };
-              resolve(transactionReceiptWithDecodedLogArgs);
+
+              resolve(transactionReceipt);
             }
           },
           pollingIntervalMs,

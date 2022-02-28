@@ -1,16 +1,10 @@
 public {{this.name}} = {
     async callAsync(
     {{> typed_params inputs=inputs}}
-        txData: TxData = {},
+        txData: Partial<TxData> = {},
     ): Promise<{{> return_type outputs=outputs}}> {
-        const self = this as {{contractName}}Contract;
-        const result = await promisify<{{> return_type outputs=outputs}}>(
-            self.web3ContractInstance.{{this.name}}.call,
-            self.web3ContractInstance,
-        )(
-            {{> params inputs=inputs}}
+        return await this.contract.methods.{{this.name}}({{> params inputs=inputs}}).call(
             txData,
         );
-        return result;
     },
 };

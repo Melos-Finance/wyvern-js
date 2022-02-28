@@ -17,7 +17,7 @@ export const deployed = {
         'WyvernTokenTransferProxy': '0x82d102457854c985221249f86659c9d6cf12aa72'
     },
     'development': {
-        'Migrations': '0x1702092818AB4f983E3B84Fa2a5Fb3394c027a12',
+        'Migrations': '0x39A2adCa744E0F47daE9a4609e40c9a321Da0eCb',
         'TestToken': '0xc2148e012abd699b76b298d5bca1618c43f985fe',
         'TestDAO': '0x0dd6e287e51c142ed4db36b55c5cb063a6ee444b',
         'MerkleProof': '0x4b7fc44964bebf7772e97573c49fdb9de635ee7e',
@@ -25,13 +25,13 @@ export const deployed = {
         'WyvernDAO': '0xdbfb0dca67931d6ea18380f3a26903824ff5929f',
         'WyvernRegistry': '0xf3d3f091fdc77054f8ef0fcc45edfe9012656da5',
         'SaleKindInterface': '0x9ba0fd02d538435dae6f6e5e741cd8b981416a51',
-        'WyvernExchange': '0x0737C46ebb30E1eE7362baAb3d2BD245f6EAc2A5',
+        'WyvernExchange': '0xBd7ffe466335ae27557A01779498cfB4b910a698',
         'DirectEscrowProvider': '0x46ffabd33987eef48d59cd315c5450b8eab116be',
-        'WyvernProxyRegistry': '0x1753351dcA19c02Caf41FaB88f44339a11E8c2B9',
+        'WyvernProxyRegistry': '0x9878522120D656e6418D768373F5AB5988D11572',
         'TestStatic': '0x29dd72597101f211fbfe4ea79b431987a0a005f1',
         'WyvernDAOProxy': '0xccc08fc4e4e897369182edc14acc7c0a6b7abf90',
-        'WyvernAtomicizer': '0xD07eFD6771970138dD57aB624DA4535095274F5f',
-        'WyvernTokenTransferProxy': '0x7E9a0EDD15Ad0e45FE08E277B308e5Ca3A6B0058'
+        'WyvernAtomicizer': '0xfC65849C61C34A265cC651ddEC7621770113aDdd',
+        'WyvernTokenTransferProxy': '0xeCd28B9bE2094508315D9D6c9DD6e49Efe7c84AA'
     },
     'main': {
         'Migrations': '0x62f98f9b03176f3da5a1c20955295084386c4c87',
@@ -49,21 +49,21 @@ export const deployed = {
         'WyvernTokenTransferProxy': '0xe5c783ee536cf5e63e792988335c4255169be4e1'
     },
     'bsc_testnet': {
-        'Migrations': '0x0f561e44629CABd6cD62202a9C10E0C8d942709f',
-        'WyvernProxyRegistry': '0x0ECE2E97519F923027dFCa24C4D179106332134E',
-        'WyvernTokenTransferProxy': '0x1A14e9d2096175115062930101b304730B5186c3',
-        'WyvernExchange': '0xb80e4eC0F359385B239eA91F9e6222e3a659E100',
+        'Migrations': '0x5d5880c4d373753D05A6f365f2aD8d3b967Aab2F',
+        'WyvernProxyRegistry': '0x9C12262853f0c4a4fE3867bfC7Cb5A2A3db36AF8',
+        'WyvernTokenTransferProxy': '0x9386ce9eABb3Dc0C85F3f40BEE0bd28FF61d7DE9',
+        'WyvernExchange': '0x106F6Fe0B3a374a29db7fC5e31Abf3024Ae99F90',
         'WyvernToken': '0x0000000000000000000000000000000000000000',
         'WyvernDAO': '0x0000000000000000000000000000000000000000',
-        'WyvernAtomicizer': '0xF1287DECf9c2EF3cB9e23A76eFc7bFe31FD673c8'
+        'WyvernAtomicizer': '0x06c102ECFA01E6B6cd0F0B17E34ebb3F2d74C4Ee'
     },
     'bsc_mainnet': {
-        'Migrations': '0xF97079b54C058F9b2581F246DB1fdE1DC17e1c55',
-        'WyvernProxyRegistry': '0x1d0e2beeAf4eD10348eeFFb4d94d0FCC44570F6E',
-        'WyvernTokenTransferProxy': '0xf2e4179F4f30897FF95bC6e455F39C73E364A6B7',
-        'WyvernExchange': '0x29b893FcD425Ff5e62901f55533E3414E5Ea6931',
+        'Migrations': '0xe2AB2e1B91dd132d244D49953A9477199DF1fb5f',
+        'WyvernProxyRegistry': '0x5bc5EBF21601e0D4A6864c799f85Cae4324fd38a',
+        'WyvernTokenTransferProxy': '0xf5Be242e21A8d275a3a6b85A6C7B9475c072209B',
+        'WyvernExchange': '0x0f968Ec7f044469af9CD8A38760B993277AE9667',
         'WyvernToken': '0x0000000000000000000000000000000000000000',
         'WyvernDAO': '0x0000000000000000000000000000000000000000',
-        'WyvernAtomicizer': '0x0000000000000000000000000000000000000000'
+        'WyvernAtomicizer': '0x31F72b3cd04D2CBe22CfA44d657229044bA80EC6'
     }
 };

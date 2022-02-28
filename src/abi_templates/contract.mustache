@@ -3,11 +3,11 @@
  * Templates can be found at https://github.com/0xProject/0x.js/tree/development/packages/abi-gen-templates.
  */
 // tslint:disable-next-line:no-unused-variable
-import { TxData, TxDataPayable } from '@0xproject/types';
-import { BigNumber, classUtils, promisify } from '@0xproject/utils';
-import * as Web3 from 'web3';
-
+import { TxData } from '../types';
+import BN from 'bn.js';
 import {BaseContract} from './base_contract';
+import { Contract } from "web3-eth-contract";
+import { classUtils } from "@0x/utils";
 
 export class {{contractName}}Contract extends BaseContract {
 {{#each methods}}
@@ -18,9 +18,9 @@ export class {{contractName}}Contract extends BaseContract {
     {{> tx contractName=../contractName}}
     {{/this.constant}}
 {{/each}}
-    constructor(web3ContractInstance: Web3.ContractInstance, defaults: Partial<TxData>) {
-        super(web3ContractInstance, defaults);
-        classUtils.bindAll(this, ['web3ContractInstance', 'defaults']);
+    constructor(contract: Contract, defaults: Partial<TxData>) {
+        super(contract, defaults);
+        classUtils.bindAll(this, ['contract', 'defaults']);
     }
 } // tslint:disable:max-file-line-count
 
