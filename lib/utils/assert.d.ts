@@ -1,9 +1,10 @@
+import { BigNumber } from "bignumber.js";
 import { ECSignature } from "../types";
 export declare const assert: {
     isValidSignature(orderHash: string, ecSignature: ECSignature, signerAddress: string): void;
-    isBigNumber(variableName: string, value: import("@0x/utils").BigNumber): void;
-    isNumberLike(variableName: string, value: number | import("@0x/utils").BigNumber): void;
-    isValidBaseUnitAmount(variableName: string, value: import("@0x/utils").BigNumber): void;
+    isBigNumber(variableName: string, value: BigNumber): void;
+    isNumberLike(variableName: string, value: number | BigNumber): void;
+    isValidBaseUnitAmount(variableName: string, value: BigNumber): void;
     isString(variableName: string, value: string): void;
     isFunction(variableName: string, value: any): void;
     isHexString(variableName: string, value: string): void;
