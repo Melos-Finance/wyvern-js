@@ -6,7 +6,7 @@ import { AsyncMethod, SyncMethod, WyvernProtocolError } from "../types";
 
 import { constants } from "./constants";
 
-type ErrorTransformer = (err: Error | any) => Error;
+type ErrorTransformer = (err: Error) => Error;
 
 const contractCallErrorTransformer = (error: Error) => {
   if (_.includes(error.message, constants.INVALID_JUMP_PATTERN)) {
@@ -18,7 +18,7 @@ const contractCallErrorTransformer = (error: Error) => {
   return error;
 };
 
-const schemaErrorTransformer = (error: Error | any) => {
+const schemaErrorTransformer = (error: Error) => {
   if (_.includes(error.message, constants.INVALID_TAKER_FORMAT)) {
     const errMsg =
       "Order taker must be of type string. If you want anyone to be able to fill an order - pass ZeroEx.NULL_ADDRESS";
@@ -46,7 +46,7 @@ const asyncErrorHandlerFactory = (errorTransformer: ErrorTransformer) => {
         const result = await originalMethod.apply(this, args);
         return result;
       } catch (error) {
-        const transformedError = errorTransformer(error);
+        const transformedError = errorTransformer(error as Error);
         throw transformedError;
       }
     };
@@ -73,7 +73,7 @@ const syncErrorHandlerFactory = (errorTransformer: ErrorTransformer) => {
         const result = originalMethod.apply(this, args);
         return result;
       } catch (error) {
-        const transformedError = errorTransformer(error);
+        const transformedError = errorTransformer(error as Error);
         throw transformedError;
       }
     };

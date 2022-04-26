@@ -358,7 +358,7 @@ export class WyvernProtocol {
       case "bytes32":
         return "0x0000000000000000000000000000000000000000000000000000000000000000";
       case "bytes":
-        return Buffer.from("");
+        return "";
       case "bool":
         return false;
       case "int":
@@ -375,7 +375,6 @@ export class WyvernProtocol {
   };
 
   constructor(provider: Web3Provider, config: WyvernProtocolConfig) {
-    console.log('now is local version');
     assert.isWeb3Provider("provider", provider);
     // assert.doesConformToSchema('config', config, wyvernProtocolConfigSchema)
     this._web3 = new Web3(provider);
