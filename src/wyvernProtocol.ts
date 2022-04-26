@@ -375,6 +375,7 @@ export class WyvernProtocol {
   };
 
   constructor(provider: Web3Provider, config: WyvernProtocolConfig) {
+    console.log('now is local version');
     assert.isWeb3Provider("provider", provider);
     // assert.doesConformToSchema('config', config, wyvernProtocolConfigSchema)
     this._web3 = new Web3(provider);
