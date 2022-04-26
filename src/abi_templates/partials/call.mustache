@@ -3,7 +3,7 @@ public {{this.name}} = {
     {{> typed_params inputs=inputs}}
         txData: Partial<TxData> = {},
     ): Promise<{{> return_type outputs=outputs}}> {
-        return await this.contract.methods.{{this.name}}({{> params inputs=inputs}}).call(
+        return this.contract.methods.{{this.name}}({{> params inputs=inputs}}).call(
             txData,
         );
     },

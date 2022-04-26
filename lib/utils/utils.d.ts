@@ -1,4 +1,4 @@
-import { BigNumber } from "bignumber.js";
+import BigNumber from "bignumber.js";
 import BN from "bn.js";
 import { Order, SignedOrder } from "../types";
 export declare const utils: {

@@ -1,15 +1,13 @@
-import BN from "bn.js";
+import BigNumber from "bignumber.js";
 import { provider, TransactionReceipt, Log, TransactionConfig } from "web3-core";
 import { AbiType, StateMutabilityType } from "web3-utils";
 import { ContractAbi, DecodedLogEntry, SolidityTypes } from "ethereum-types";
 export { AbiType, ContractAbi, StateMutabilityType, TransactionReceipt, SolidityTypes, };
 export interface WyvernProtocolConfig {
     network: Network;
-    gasPrice?: number | string | BN;
+    gasPrice?: number | string | BigNumber;
     wyvernExchangeContractAddress?: string;
     wyvernProxyRegistryContractAddress?: string;
-    wyvernDAOContractAddress?: string;
-    wyvernTokenContractAddress?: string;
     wyvernAtomicizerContractAddress?: string;
 }
 export declare type AsyncMethod = (...args: any[]) => Promise<any>;
@@ -48,7 +46,7 @@ export interface DecodedLogEvent<ArgsType> extends LogEvent {
     isRemoved: boolean;
     log: LogWithDecodedArgs<ArgsType>;
 }
-export declare type ContractEventArg = string | BN;
+export declare type ContractEventArg = string | BigNumber;
 export interface DecodedLogArgs {
     [argName: string]: ContractEventArg;
 }
@@ -58,10 +56,10 @@ export interface Order {
     exchange: string;
     maker: string;
     taker: string;
-    makerRelayerFee: BN;
-    takerRelayerFee: BN;
-    makerProtocolFee: BN;
-    takerProtocolFee: BN;
+    makerRelayerFee: BigNumber;
+    takerRelayerFee: BigNumber;
+    makerProtocolFee: BigNumber;
+    takerProtocolFee: BigNumber;
     feeRecipient: string;
     feeMethod: number;
     side: number;
@@ -73,11 +71,11 @@ export interface Order {
     staticTarget: string;
     staticExtradata: string;
     paymentToken: string;
-    basePrice: BN;
-    extra: BN;
-    listingTime: BN;
-    expirationTime: BN;
-    salt: BN;
+    basePrice: BigNumber;
+    extra: BigNumber;
+    listingTime: BigNumber;
+    expirationTime: BigNumber;
+    salt: BigNumber;
 }
 export interface SignedOrder extends Order {
     ecSignature: ECSignature;

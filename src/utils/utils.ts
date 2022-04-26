@@ -1,6 +1,6 @@
 /* Sourced from 0x.js */
 
-import { BigNumber } from "bignumber.js";
+import BigNumber from "bignumber.js";
 import BN from "bn.js";
 import * as ethABI from "@melosstudio/ethereumjs-abi";
 import * as ethUtil from "ethereumjs-util";
@@ -16,7 +16,7 @@ export const utils = {
    * We do not use BN anywhere else in the codebase.
    */
   bigNumberToBN(value: BigNumber) {
-    return new BN(value.toString(), 10);
+    return new BN(value.toString(10), 10);
   },
   consoleLog(message: string): void {
     // tslint:disable-next-line: no-console
@@ -44,19 +44,19 @@ export const utils = {
       { value: order.maker, type: SolidityTypes.Address },
       { value: order.taker, type: SolidityTypes.Address },
       {
-        value: order.makerRelayerFee,
+        value: utils.bigNumberToBN(order.makerRelayerFee),
         type: SolidityTypes.Uint256,
       },
       {
-        value: order.takerRelayerFee,
+        value: utils.bigNumberToBN(order.takerRelayerFee),
         type: SolidityTypes.Uint256,
       },
       {
-        value: order.makerProtocolFee,
+        value: utils.bigNumberToBN(order.makerProtocolFee),
         type: SolidityTypes.Uint256,
       },
       {
-        value: order.takerProtocolFee,
+        value: utils.bigNumberToBN(order.takerProtocolFee),
         type: SolidityTypes.Uint256,
       },
       { value: order.feeRecipient, type: SolidityTypes.Address },
@@ -66,33 +66,33 @@ export const utils = {
       { value: order.target, type: SolidityTypes.Address },
       { value: order.howToCall, type: SolidityTypes.Uint8 },
       {
-        value: Buffer.from(order.calldata.slice(2), "hex"),
+        value: new Buffer(order.calldata.slice(2), "hex"),
         type: SolidityTypes.Bytes,
       },
       {
-        value: Buffer.from(order.replacementPattern.slice(2), "hex"),
+        value: new Buffer(order.replacementPattern.slice(2), "hex"),
         type: SolidityTypes.Bytes,
       },
       { value: order.staticTarget, type: SolidityTypes.Address },
       {
-        value: Buffer.from(order.staticExtradata.slice(2), "hex"),
+        value: new Buffer(order.staticExtradata.slice(2), "hex"),
         type: SolidityTypes.Bytes,
       },
       { value: order.paymentToken, type: SolidityTypes.Address },
       {
-        value: order.basePrice,
+        value: utils.bigNumberToBN(order.basePrice),
         type: SolidityTypes.Uint256,
       },
-      { value: order.extra, type: SolidityTypes.Uint256 },
+      { value: utils.bigNumberToBN(order.extra), type: SolidityTypes.Uint256 },
       {
-        value: order.listingTime,
+        value: utils.bigNumberToBN(order.listingTime),
         type: SolidityTypes.Uint256,
       },
       {
-        value: order.expirationTime,
+        value: utils.bigNumberToBN(order.expirationTime),
         type: SolidityTypes.Uint256,
       },
-      { value: order.salt, type: SolidityTypes.Uint256 },
+      { value: utils.bigNumberToBN(order.salt), type: SolidityTypes.Uint256 },
     ];
     const types = _.map(orderParts, (o) => o.type);
     const values = _.map(orderParts, (o) => o.value);

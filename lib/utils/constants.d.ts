@@ -73,6 +73,12 @@ export declare const constants: {
             WyvernDAO: string;
             WyvernAtomicizer: string;
         };
+        'rinkeby-fork': {
+            WyvernProxyRegistry: string;
+            WyvernTokenTransferProxy: string;
+            WyvernAtomicizer: string;
+            WyvernExchange: string;
+        };
     };
     ATOMICIZER_ABI: {
         constant: boolean;

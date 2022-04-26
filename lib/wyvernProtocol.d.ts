@@ -1,12 +1,11 @@
 import { BigNumber } from "bignumber.js";
-import BN from "bn.js";
 import { WyvernAtomicizerContract } from "./abi_gen/wyvern_atomicizer";
 import { WyvernExchangeContract } from "./abi_gen/wyvern_exchange";
 import { WyvernProxyRegistryContract } from "./abi_gen/wyvern_proxy_registry";
 import { AtomicizedReplacementEncoder, ECSignature, Network, Order, ReplacementEncoder, SignedOrder, TransactionReceipt, Web3Provider, WyvernProtocolConfig } from "./types";
 export declare class WyvernProtocol {
     static NULL_ADDRESS: string;
-    static MAX_UINT_256: BN;
+    static MAX_UINT_256: BigNumber;
     wyvernExchange: WyvernExchangeContract;
     wyvernProxyRegistry: WyvernProxyRegistryContract;
     wyvernAtomicizer: WyvernAtomicizerContract;
@@ -47,7 +46,7 @@ export declare class WyvernProtocol {
      * @param   decimals    The number of decimal places the unit amount has.
      * @return  The amount in units.
      */
-    static toUnitAmount(amount: BigNumber, decimals: number): number;
+    static toUnitAmount(amount: BigNumber, decimals: number): BigNumber;
     /**
      * A baseUnit is defined as the smallest denomination of a token. An amount expressed in baseUnits
      * is the amount expressed in the smallest denomination.

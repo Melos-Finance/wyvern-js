@@ -66,4 +66,10 @@ export declare const deployed: {
         WyvernDAO: string;
         WyvernAtomicizer: string;
     };
+    'rinkeby-fork': {
+        WyvernProxyRegistry: string;
+        WyvernTokenTransferProxy: string;
+        WyvernAtomicizer: string;
+        WyvernExchange: string;
+    };
 };

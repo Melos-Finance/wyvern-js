@@ -16,19 +16,22 @@ public {{this.name}} = {
                 {{> params inputs=inputs}}
             ),
         );
-        return await self.contract.methods.{{this.name}}({{> params inputs=inputs}}).send(
-            txDataWithDefaults,
-        );
+        
+        return new Promise<string>((resolve, reject) => {
+            self.contract.methods.{{this.name}}(
+               {{> params inputs=inputs}}
+            )
+            .send(txDataWithDefaults)
+            .once("transactionHash", (txHash: string) => resolve(txHash))
+            .once("error", (error: any) => reject(error));
+      });
     },
     async estimateGasAsync(
     {{> typed_params inputs=inputs}}
         txData: Partial<TxData> = {},
     ): Promise<number> {
-        const txDataWithDefaults = await this.applyDefaultsToTxDataAsync(
+        return this.contract.methods.{{this.name}}({{> params inputs=inputs}}).estimateGas(
             txData,
-        );
-        return await this.contract.methods.{{this.name}}({{> params inputs=inputs}}).estimateGas(
-            txDataWithDefaults,
         );
     },
     getABIEncodedTransactionData(

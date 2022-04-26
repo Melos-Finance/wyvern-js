@@ -2,7 +2,7 @@ import * as ethABI from "@melosstudio/ethereumjs-abi";
 import { WyvernProtocol } from "./wyvernProtocol";
 import { WyvernAtomicizerContract } from "./abi_gen/wyvern_atomicizer";
 import { AnnotatedFunctionABI, FunctionInputKind, Schema } from "./types";
-import BN from "bn.js";
+import { toBN } from "web3-utils";
 
 const failWith = (msg: string): any => {
   throw new Error(msg);
@@ -119,14 +119,14 @@ export const encodeAtomicizedSell: AtomicizedSellEncoder<any> = (
       calldata,
       abi: schema.functions.transfer(asset),
       address: target,
-      value: new BN(0),
+      value: "0",
     };
   });
 
   const atomicizedCalldata = atomicizer.atomicize.getABIEncodedTransactionData(
     transactions.map((t) => t.address),
     transactions.map((t) => t.value),
-    transactions.map((t) => new BN((t.calldata.length - 2) / 2)), // subtract 2 for '0x', divide by 2 for hex
+    transactions.map((t) => toBN((t.calldata.length - 2) / 2).toString(10)), // subtract 2 for '0x', divide by 2 for hex
     transactions.map((t) => t.calldata).reduce((x, y) => x + y.slice(2)) // cut off the '0x'
   );
 
@@ -160,14 +160,14 @@ export const encodeAtomicizedBuy: AtomicizedBuyEncoder<any> = (
       calldata,
       abi: schema.functions.transfer(asset),
       address: target,
-      value: new BN(0),
+      value: "0",
     };
   });
 
   const atomicizedCalldata = atomicizer.atomicize.getABIEncodedTransactionData(
     transactions.map((t) => t.address),
     transactions.map((t) => t.value),
-    transactions.map((t) => new BN((t.calldata.length - 2) / 2)), // subtract 2 for '0x', divide by 2 for hex
+    transactions.map((t) => toBN((t.calldata.length - 2) / 2).toString(10)), // subtract 2 for '0x', divide by 2 for hex
     transactions.map((t) => t.calldata).reduce((x, y) => x + y.slice(2)) // cut off the '0x'
   );
 

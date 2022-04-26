@@ -1,4 +1,4 @@
-import BN from "bn.js";
+import BigNumber from "bignumber.js";
 
 import {
   provider,
@@ -20,11 +20,9 @@ export {
 
 export interface WyvernProtocolConfig {
   network: Network;
-  gasPrice?: number | string | BN;
+  gasPrice?: number | string | BigNumber;
   wyvernExchangeContractAddress?: string;
   wyvernProxyRegistryContractAddress?: string;
-  wyvernDAOContractAddress?: string;
-  wyvernTokenContractAddress?: string;
   wyvernAtomicizerContractAddress?: string;
 }
 
@@ -72,7 +70,7 @@ export interface DecodedLogEvent<ArgsType> extends LogEvent {
   log: LogWithDecodedArgs<ArgsType>;
 }
 
-export type ContractEventArg = string | BN;
+export type ContractEventArg = string | BigNumber;
 
 export interface DecodedLogArgs {
   [argName: string]: ContractEventArg;
@@ -85,10 +83,10 @@ export interface Order {
   exchange: string;
   maker: string;
   taker: string;
-  makerRelayerFee: BN;
-  takerRelayerFee: BN;
-  makerProtocolFee: BN;
-  takerProtocolFee: BN;
+  makerRelayerFee: BigNumber;
+  takerRelayerFee: BigNumber;
+  makerProtocolFee: BigNumber;
+  takerProtocolFee: BigNumber;
   feeRecipient: string;
   feeMethod: number;
   side: number;
@@ -100,11 +98,11 @@ export interface Order {
   staticTarget: string;
   staticExtradata: string;
   paymentToken: string;
-  basePrice: BN;
-  extra: BN;
-  listingTime: BN;
-  expirationTime: BN;
-  salt: BN;
+  basePrice: BigNumber;
+  extra: BigNumber;
+  listingTime: BigNumber;
+  expirationTime: BigNumber;
+  salt: BigNumber;
 }
 
 export interface SignedOrder extends Order {

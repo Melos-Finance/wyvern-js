@@ -3,7 +3,6 @@
  * Templates can be found at https://github.com/0xProject/0x.js/tree/development/packages/abi-gen-templates.
  */
 import { TxData } from '../types';
-import BN from 'bn.js';
 import { BaseContract } from './base_contract';
 import { Contract } from "web3-eth-contract";
 export declare class WyvernProxyRegistryContract extends BaseContract {
@@ -24,7 +23,7 @@ export declare class WyvernProxyRegistryContract extends BaseContract {
         getABIEncodedTransactionData(addr_0: string): string;
     };
     pending: {
-        callAsync(index_0_0: string, txData?: Partial<TxData>): Promise<BN>;
+        callAsync(index_0_0: string, txData?: Partial<TxData>): Promise<string>;
     };
     contracts: {
         callAsync(index_0_0: string, txData?: Partial<TxData>): Promise<boolean>;
@@ -51,7 +50,7 @@ export declare class WyvernProxyRegistryContract extends BaseContract {
         getABIEncodedTransactionData(): string;
     };
     DELAY_PERIOD: {
-        callAsync(txData?: Partial<TxData>): Promise<BN>;
+        callAsync(txData?: Partial<TxData>): Promise<string>;
     };
     transferOwnership: {
         sendTransactionAsync(newOwner_0: string, txData?: Partial<TxData>): Promise<string>;

@@ -1,6 +1,5 @@
 import { SchemaValidator } from "@0x/json-schemas";
 import { BigNumber } from "bignumber.js";
-import BN from "bn.js";
 
 import { intervalUtils } from "@0x/utils";
 import Web3 from "web3";
@@ -35,7 +34,10 @@ import { utils } from "./utils/utils";
 
 export class WyvernProtocol {
   public static NULL_ADDRESS = constants.NULL_ADDRESS;
-  public static MAX_UINT_256 = new BN(2).pow(new BN(256)).subn(1);
+  public static MAX_UINT_256 = new BigNumber(2)
+    .pow(256)
+    .minus(1)
+    .integerValue();
 
   public wyvernExchange: WyvernExchangeContract;
   public wyvernProxyRegistry: WyvernProxyRegistryContract;
@@ -133,12 +135,12 @@ export class WyvernProtocol {
    * @param   decimals    The number of decimal places the unit amount has.
    * @return  The amount in units.
    */
-  public static toUnitAmount(amount: BigNumber, decimals: number): number {
+  public static toUnitAmount(amount: BigNumber, decimals: number): BigNumber {
     // assert.isValidBaseUnitAmount("amount", amount);
     // assert.isNumber("decimals", decimals);
     const aUnit = new BigNumber(10).pow(decimals);
     const unit = amount.div(aUnit);
-    return unit.toNumber();
+    return unit;
   }
 
   /**
