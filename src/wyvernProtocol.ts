@@ -1,7 +1,7 @@
 import { SchemaValidator } from "@0x/json-schemas";
 import { BigNumber } from "bignumber.js";
 
-import { intervalUtils } from "@0x/utils";
+import { intervalUtils, providerUtils } from "@0x/utils";
 import Web3 from "web3";
 import * as ethABI from "@melosstudio/ethereumjs-abi";
 import * as ethUtil from "ethereumjs-util";
@@ -31,6 +31,7 @@ import { constants } from "./utils/constants";
 import { decorators } from "./utils/decorators";
 import { signatureUtils } from "./utils/signature_utils";
 import { utils } from "./utils/utils";
+import { SupportedProvider } from "ethereum-types";
 
 export class WyvernProtocol {
   public static NULL_ADDRESS = constants.NULL_ADDRESS;
@@ -375,7 +376,9 @@ export class WyvernProtocol {
   };
 
   constructor(provider: Web3Provider, config: WyvernProtocolConfig) {
-    assert.isWeb3Provider("provider", provider);
+    // assert.isWeb3Provider("provider", provider);
+    providerUtils.standardizeOrThrow(provider as SupportedProvider);
+
     // assert.doesConformToSchema('config', config, wyvernProtocolConfigSchema)
     this._web3 = new Web3(provider);
 
