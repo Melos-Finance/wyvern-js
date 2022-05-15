@@ -7,19 +7,10 @@ export declare const constants: {
     DEFAULT_BLOCK_POLLING_INTERVAL: number;
     DEPLOYED: {
         rinkeby: {
-            TestToken: string;
-            TestDAO: string;
             Migrations: string;
-            MerkleProof: string;
-            WyvernToken: string;
-            WyvernDAO: string;
-            WyvernRegistry: string;
             SaleKindInterface: string;
             WyvernExchange: string;
-            DirectEscrowProvider: string;
             WyvernProxyRegistry: string;
-            TestStatic: string;
-            WyvernDAOProxy: string;
             WyvernAtomicizer: string;
             WyvernTokenTransferProxy: string;
         };
@@ -42,16 +33,9 @@ export declare const constants: {
         };
         main: {
             Migrations: string;
-            MerkleProof: string;
-            WyvernToken: string;
-            WyvernDAO: string;
-            TestToken: string;
-            TestDAO: string;
-            TestStatic: string;
             WyvernProxyRegistry: string;
             SaleKindInterface: string;
             WyvernExchange: string;
-            WyvernDAOProxy: string;
             WyvernAtomicizer: string;
             WyvernTokenTransferProxy: string;
         };
@@ -60,8 +44,6 @@ export declare const constants: {
             WyvernProxyRegistry: string;
             WyvernTokenTransferProxy: string;
             WyvernExchange: string;
-            WyvernToken: string;
-            WyvernDAO: string;
             WyvernAtomicizer: string;
         };
         bsc_mainnet: {
@@ -69,15 +51,7 @@ export declare const constants: {
             WyvernProxyRegistry: string;
             WyvernTokenTransferProxy: string;
             WyvernExchange: string;
-            WyvernToken: string;
-            WyvernDAO: string;
             WyvernAtomicizer: string;
-        };
-        'rinkeby-fork': {
-            WyvernProxyRegistry: string;
-            WyvernTokenTransferProxy: string;
-            WyvernAtomicizer: string;
-            WyvernExchange: string;
         };
     };
     ATOMICIZER_ABI: {
