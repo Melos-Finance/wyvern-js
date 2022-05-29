@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../src/tokens/bsc_testnet/index.ts"],"names":[],"mappings":";;;AAEa,QAAA,gBAAgB,GAAkB;IAC7C,qBAAqB,EAAE;QACrB,IAAI,EAAE,aAAa;QACnB,MAAM,EAAE,MAAM;QACd,QAAQ,EAAE,EAAE;QACZ,OAAO,EAAE,4CAA4C;KACtD;IACD,WAAW,EAAE,EAAE;CAChB,CAAC"}

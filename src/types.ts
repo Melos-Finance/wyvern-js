@@ -1,14 +1,28 @@
-import { TransactionReceipt } from "@0xproject/types";
-import { BigNumber } from "@0xproject/utils";
-import * as Web3 from "web3";
+import BigNumber from "bignumber.js";
+
+import {
+  provider,
+  TransactionReceipt,
+  Log,
+  TransactionConfig,
+} from "web3-core";
+import { AbiType, StateMutabilityType } from "web3-utils";
+
+import { ContractAbi, DecodedLogEntry, SolidityTypes } from "ethereum-types";
+
+export {
+  AbiType,
+  ContractAbi,
+  StateMutabilityType,
+  TransactionReceipt,
+  SolidityTypes,
+};
 
 export interface WyvernProtocolConfig {
   network: Network;
-  gasPrice?: BigNumber;
+  gasPrice?: number | string | BigNumber;
   wyvernExchangeContractAddress?: string;
   wyvernProxyRegistryContractAddress?: string;
-  wyvernDAOContractAddress?: string;
-  wyvernTokenContractAddress?: string;
   wyvernAtomicizerContractAddress?: string;
 }
 
@@ -35,13 +49,6 @@ export enum HowToCall {
   Create = 3,
 }
 
-export enum AbiType {
-  Function = "function",
-  Constructor = "constructor",
-  Event = "event",
-  Fallback = "fallback",
-}
-
 export enum WyvernProtocolError {
   InvalidSignature = "INVALID_SIGNATURE",
   TransactionMiningTimeout = "TRANSACTION_MINING_TIMEOUT",
@@ -55,8 +62,10 @@ export interface ECSignature {
   s: string;
 }
 
-export type LogEvent = Web3.LogEntryEvent;
-export interface DecodedLogEvent<ArgsType> {
+export type LogEvent = Log;
+export type RawLog = Log;
+
+export interface DecodedLogEvent<ArgsType> extends LogEvent {
   isRemoved: boolean;
   log: LogWithDecodedArgs<ArgsType>;
 }
@@ -68,42 +77,7 @@ export interface DecodedLogArgs {
 }
 
 export interface LogWithDecodedArgs<ArgsType>
-  extends Web3.DecodedLogEntry<ArgsType> {}
-
-export interface TransactionReceiptWithDecodedLogs extends TransactionReceipt {
-  logs: Array<LogWithDecodedArgs<DecodedLogArgs> | Web3.LogEntry>;
-}
-
-export type EventCallback<ArgsType> = (
-  err: null | Error,
-  log?: DecodedLogEvent<ArgsType>
-) => void;
-export type EventWatcherCallback = (log: LogEvent) => void;
-
-export enum SolidityTypes {
-  Address = "address",
-  Uint256 = "uint256",
-  Uint8 = "uint8",
-  Uint = "uint",
-  Bytes = "bytes",
-  String = "string",
-}
-
-export type RawLog = Web3.LogEntry;
-
-export interface ContractEvent {
-  logIndex: number;
-  transactionIndex: number;
-  transactionHash: string;
-  blockHash: string;
-  blockNumber: number;
-  address: string;
-  type: string;
-  event: string;
-  args: ContractEventArgs;
-}
-
-export type ContractEventArgs = string; // TODO
+  extends DecodedLogEntry<ArgsType> {}
 
 export interface Order {
   exchange: string;
@@ -135,13 +109,6 @@ export interface SignedOrder extends Order {
   ecSignature: ECSignature;
 }
 
-export enum StateMutability {
-  Pure = "pure",
-  View = "view",
-  Payable = "payable",
-  Nonpayable = "nonpayable",
-}
-
 export enum FunctionInputKind {
   Replaceable = "replaceable",
   Asset = "asset",
@@ -171,6 +138,20 @@ export interface AnnotatedFunctionOutput {
   kind: FunctionOutputKind;
 }
 
+export enum EventInputKind {
+  Source = "source",
+  Destination = "destination",
+  Asset = "asset",
+  Other = "other",
+}
+
+export interface AnnotatedEventInput {
+  name: string;
+  type: string;
+  indexed: boolean;
+  kind: EventInputKind;
+}
+
 export interface AnnotatedFunctionABI {
   type: AbiType;
   name: string;
@@ -178,8 +159,17 @@ export interface AnnotatedFunctionABI {
   inputs: AnnotatedFunctionInput[];
   outputs: AnnotatedFunctionOutput[];
   constant: boolean;
-  stateMutability: StateMutability;
+  stateMutability: StateMutabilityType;
   payable: boolean;
+}
+
+export interface AnnotatedEventABI<T> {
+  type: AbiType;
+  name: string;
+  target: string;
+  anonymous: boolean;
+  inputs: AnnotatedEventInput[];
+  assetFromInputs: (inputs: any, web3: any) => Promise<T>;
 }
 
 export type ReplacementEncoder = (
@@ -192,4 +182,75 @@ export type AtomicizedReplacementEncoder = (
   kind?: FunctionInputKind
 ) => string;
 
-export type Web3Provider = Web3.Provider;
+export type Web3Provider = provider;
+
+export type TxData = TransactionConfig;
+export type CallData = TransactionConfig;
+
+export interface Token {
+  name: string;
+  symbol: string;
+  decimals: number;
+  address: string;
+}
+
+export interface NetworkTokens {
+  canonicalWrappedEther: Token;
+  otherTokens: Token[];
+}
+
+export interface AnnotatedFunctionABIReturning<T> extends AnnotatedFunctionABI {
+  assetFromOutputs: (outputs: any) => T;
+}
+
+export interface SchemaFunctions<T> {
+  transfer: (asset: T) => AnnotatedFunctionABI;
+  ownerOf?: (asset: T) => AnnotatedFunctionABI;
+  countOf?: (asset: T) => AnnotatedFunctionABIReturning<number>;
+  assetsOfOwnerByIndex: Array<AnnotatedFunctionABIReturning<T | null>>;
+  initializeProxy?: (owner: string) => AnnotatedFunctionABI;
+}
+
+export interface SchemaEvents<T> {
+  transfer: Array<AnnotatedEventABI<T>>;
+}
+
+export interface Property {
+  key: string;
+  kind: string;
+  value: any;
+}
+
+export interface FormatInfo {
+  thumbnail: string;
+  title: string;
+  description: string;
+  url: string;
+  properties: Property[];
+}
+
+export interface SchemaField {
+  name: string;
+  type: string;
+  description: string;
+  values?: any[];
+  readOnly?: boolean;
+}
+
+export interface Schema<T> {
+  version: number;
+  deploymentBlock: number;
+  name: string;
+  description: string;
+  thumbnail: string;
+  website: string;
+  fields: SchemaField[];
+  checkAsset?: (asset: T) => boolean;
+  assetFromFields: (fields: any) => T;
+  assetToFields?: (asset: T) => any;
+  allAssets?: (web3: any) => Promise<T[]>;
+  functions: SchemaFunctions<T>;
+  events: SchemaEvents<T>;
+  formatter: (obj: T, web3: any) => Promise<FormatInfo>;
+  hash: (obj: T) => any;
+}

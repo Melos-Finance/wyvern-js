@@ -1,8 +1,8 @@
-import { TxData, TxDataPayable } from '@0xproject/types';
-import * as Web3 from 'web3';
+import { TxData } from "../types";
+import { Contract } from "web3-eth-contract";
 export declare class BaseContract {
-    protected web3ContractInstance: Web3.ContractInstance;
+    protected contract: Contract;
     protected defaults: Partial<TxData>;
-    protected applyDefaultsToTxDataAsync<T extends TxData | TxDataPayable>(txData: T, estimateGasAsync?: (txData: T) => Promise<number>): Promise<TxData>;
-    constructor(web3ContractInstance: Web3.ContractInstance, defaults: Partial<TxData>);
+    protected applyDefaultsToTxDataAsync<T extends Partial<TxData>>(txData: T, estimateGasAsync?: (txData: T) => Promise<number>): Promise<Partial<TxData>>;
+    constructor(contract: Contract, defaults: Partial<TxData>);
 }
