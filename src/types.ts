@@ -34,6 +34,8 @@ export enum Network {
   Rinkeby = "rinkeby",
   BSC = "bsc_mainnet",
   BSCTestnet = "bsc_testnet",
+  Polygon = "polygon",
+  Mumbai = "mumbai"
 }
 
 export enum SaleKind {

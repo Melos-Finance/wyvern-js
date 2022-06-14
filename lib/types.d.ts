@@ -16,7 +16,9 @@ export declare enum Network {
     Main = "main",
     Rinkeby = "rinkeby",
     BSC = "bsc_mainnet",
-    BSCTestnet = "bsc_testnet"
+    BSCTestnet = "bsc_testnet",
+    Polygon = "polygon",
+    Mumbai = "mumbai"
 }
 export declare enum SaleKind {
     FixedPrice = 0,

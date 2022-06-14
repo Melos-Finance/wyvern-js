@@ -53,6 +53,20 @@ export declare const constants: {
             WyvernExchange: string;
             WyvernAtomicizer: string;
         };
+        polygon: {
+            Migrations: string;
+            WyvernProxyRegistry: string;
+            WyvernTokenTransferProxy: string;
+            WyvernAtomicizer: string;
+            WyvernExchange: string;
+        };
+        mumbai: {
+            Migrations: string;
+            WyvernProxyRegistry: string;
+            WyvernTokenTransferProxy: string;
+            WyvernAtomicizer: string;
+            WyvernExchange: string;
+        };
     };
     ATOMICIZER_ABI: {
         constant: boolean;
