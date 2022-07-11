@@ -62,5 +62,10 @@ export declare class WyvernProxyRegistryContract extends BaseContract {
         estimateGasAsync(authAddress_0: string, txData?: Partial<TxData>): Promise<number>;
         getABIEncodedTransactionData(authAddress_0: string): string;
     };
+    grantAuthentication: {
+        sendTransactionAsync(authAddress_0: string, txData?: Partial<TxData>): Promise<string>;
+        estimateGasAsync(authAddress_0: string, txData?: Partial<TxData>): Promise<number>;
+        getABIEncodedTransactionData(authAddress_0: string): string;
+    };
     constructor(contract: Contract, defaults: Partial<TxData>);
 }

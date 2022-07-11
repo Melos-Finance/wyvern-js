@@ -227,6 +227,20 @@ export const proxyRegistryABI = [
         'payable': false,
         'stateMutability': 'nonpayable',
         'type': 'function'
+    },
+    {
+        'constant': false,
+        'inputs': [
+            {
+                'name': 'authAddress',
+                'type': 'address'
+            }
+        ],
+        'name': 'grantAuthentication',
+        'outputs': [],
+        'payable': false,
+        'stateMutability': 'nonpayable',
+        'type': 'function'
     }
 ];
 // tslint:disable:max-file-line-count

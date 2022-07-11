@@ -153,20 +153,6 @@ export const exchangeABI = [
     },
     {
         'constant': true,
-        'inputs': [],
-        'name': 'codename',
-        'outputs': [
-            {
-                'name': '',
-                'type': 'string'
-            }
-        ],
-        'payable': false,
-        'stateMutability': 'view',
-        'type': 'function'
-    },
-    {
-        'constant': true,
         'inputs': [
             {
                 'name': 'addr',

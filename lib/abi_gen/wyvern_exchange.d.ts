@@ -39,9 +39,6 @@ export declare class WyvernExchangeContract extends BaseContract {
     minimumTakerProtocolFee: {
         callAsync(txData?: Partial<TxData>): Promise<string>;
     };
-    codename: {
-        callAsync(txData?: Partial<TxData>): Promise<string>;
-    };
     testCopyAddress: {
         callAsync(addr_0: string, txData?: Partial<TxData>): Promise<string>;
     };
