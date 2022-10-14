@@ -28,7 +28,7 @@ export const deployed = {
         'Migrations': '0x62f98f9b03176f3da5a1c20955295084386c4c87',
         'WyvernProxyRegistry': '0x5e5b3CB21E17006F4A8A826cfA885AD0F604CA18',
         'SaleKindInterface': '0x77a1dada690ab5172d80ae3b7ccaf88ee3c2e607',
-        'WyvernExchange': '0x389D6297AE582E128b7171BCfFd8f7707a858843',
+        'WyvernExchange': '0x27449197E98E80F324c17dBE0863452D43D74742',
         'WyvernAtomicizer': '0x43Ebba3D37c497C616Cc357f43e1e627268caBeD',
         'WyvernTokenTransferProxy': '0xCb879106DB73E55f0Dc56B34125e6ED8794CC2A3'
     },
@@ -43,7 +43,7 @@ export const deployed = {
         'Migrations': '0xe2AB2e1B91dd132d244D49953A9477199DF1fb5f',
         'WyvernProxyRegistry': '0x5bc5EBF21601e0D4A6864c799f85Cae4324fd38a',
         'WyvernTokenTransferProxy': '0xf5Be242e21A8d275a3a6b85A6C7B9475c072209B',
-        'WyvernExchange': '0x0f968Ec7f044469af9CD8A38760B993277AE9667',
+        'WyvernExchange': '0x5F53056D98Aa54AC343E3bE2B8dE162E0Fa0C0a4',
         'WyvernAtomicizer': '0x31F72b3cd04D2CBe22CfA44d657229044bA80EC6'
     },
     'polygon': {
@@ -59,5 +59,12 @@ export const deployed = {
         'WyvernTokenTransferProxy': '0x14BcCC20160fC8e6985f701c15462fD883f8Ba2c',
         'WyvernAtomicizer': '0x5E691bFd796382C0267D61c06006276F9112E775',
         'WyvernExchange': '0x7556a847C786c27A22C149aa5B4e555819156e8D'
+    },
+    'goerli': {
+        'Migrations': '0x2C7DeDe6b57B7961EbFd7c38Dd185b5aA66DB0ba',
+        'WyvernProxyRegistry': '0x5D6BA3f1841136eF3B5126C0EDE2c14f77BE65D1',
+        'WyvernTokenTransferProxy': '0x44258A9D54e6F07002548639af51ED8a7C0D4467',
+        'WyvernAtomicizer': '0x00266B1A5E641f26A8F15E151C132d1513107624',
+        'WyvernExchange': '0x640CB64ee82AF7b0274eEED70A85687979E1C1Ec'
     }
 };

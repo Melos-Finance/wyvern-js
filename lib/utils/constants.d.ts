@@ -67,6 +67,13 @@ export declare const constants: {
             WyvernAtomicizer: string;
             WyvernExchange: string;
         };
+        goerli: {
+            Migrations: string;
+            WyvernProxyRegistry: string;
+            WyvernTokenTransferProxy: string;
+            WyvernAtomicizer: string;
+            WyvernExchange: string;
+        };
     };
     ATOMICIZER_ABI: {
         constant: boolean;
