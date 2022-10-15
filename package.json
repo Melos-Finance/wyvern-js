@@ -1,6 +1,6 @@
 {
   "name": "@melosstudio/wyvern-js",
-  "version": "3.3.7",
+  "version": "3.3.8",
   "description": "Javascript SDK for the Wyvern Protocol",
   "main": "lib/index.js",
   "scripts": {
