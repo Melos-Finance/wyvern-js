@@ -6,4 +6,5 @@ export declare const tokens: {
     bsc_testnet: NetworkTokens;
     polygon: NetworkTokens;
     mumbai: NetworkTokens;
+    goerli: NetworkTokens;
 };

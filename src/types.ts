@@ -32,10 +32,11 @@ export type SyncMethod = (...args: any[]) => any;
 export enum Network {
   Main = "main",
   Rinkeby = "rinkeby",
+  Goerli = "goerli",
   BSC = "bsc_mainnet",
   BSCTestnet = "bsc_testnet",
   Polygon = "polygon",
-  Mumbai = "mumbai"
+  Mumbai = "mumbai",
 }
 
 export enum SaleKind {

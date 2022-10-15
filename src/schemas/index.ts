@@ -6,12 +6,14 @@ import { schemas as rinkebySchemas } from "./rinkeby/index";
 import { schemas as bscSchemas } from "./bsc/index";
 import { schemas as bscTestnetSchema } from "./bsc_testnet/index";
 import { schemas as polygonSchema } from "./polygon";
-import { schemas as mumbaiSchema} from "./mumbai"
+import { schemas as mumbaiSchema } from "./mumbai";
+import { schemas as goerliSchema } from "./goerli";
 export const schemas = {
   rinkeby: rinkebySchemas,
   main: mainSchemas,
   bsc_mainnet: bscSchemas,
   bsc_testnet: bscTestnetSchema,
-  polygon:polygonSchema,
-  mumbai:mumbaiSchema
+  polygon: polygonSchema,
+  mumbai: mumbaiSchema,
+  goerli: goerliSchema,
 };

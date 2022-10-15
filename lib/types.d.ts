@@ -15,6 +15,7 @@ export declare type SyncMethod = (...args: any[]) => any;
 export declare enum Network {
     Main = "main",
     Rinkeby = "rinkeby",
+    Goerli = "goerli",
     BSC = "bsc_mainnet",
     BSCTestnet = "bsc_testnet",
     Polygon = "polygon",

@@ -6,4 +6,5 @@ export declare const schemas: {
     bsc_testnet: Schema<any>[];
     polygon: Schema<any>[];
     mumbai: Schema<any>[];
+    goerli: Schema<any>[];
 };
